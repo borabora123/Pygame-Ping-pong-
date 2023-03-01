@@ -2,24 +2,23 @@ import pygame
 import sys
 import random
 import os
-from PIL import Image
 
 pygame.font.init()
 pygame.__init__
 FPS = 50
-size = width, height = 700, 500
+size  = width, height  =  700, 500
+light = (200, 200, 200)
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
-light = (200, 200, 200)
-color = pygame.Color('grey12')
-ball = pygame.Rect(width // 2 - 15, height // 2 - 15, 30, 30)
-player = pygame.Rect(width // 2 - 70, height - 20, 140, 10)
-enemy = pygame.Rect(width // 2 - 70, 10, 140, 10)
+color = pygame.Color ('grey12')
+ball = pygame.Rect(width  //  2-15  , height  //  2-15  , 30, 30)
+player = pygame.Rect (width // 2-70  , height   -20, 140, 10)
+enemy = pygame.Rect(width // 2-70  , 10, 140, 10)
 all_sprites = pygame.sprite.Group
 end_sprite = pygame.sprite.Sprite
 paus_cout = 0
 savex = 0
-savey = 0
+savey  = 0
 end_pos_x = -width
 speedx = 3
 speedy = 3
@@ -51,6 +50,7 @@ def terminate():
     sys.exit()
 
 def start_screen():
+    global mode
     intro_text = ["ЗАСТАВКА", "",
                   "Правила игры",
                   "Если в правилах несколько строк,",
@@ -66,6 +66,11 @@ def start_screen():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LSHIFT:
                     return
+                if event.key == pygame.K_p:
+                    mode = 'pvp'
+                    speed_enemy = 0
+                elif event.key == pygame.K_e:
+                    mode = 'pve'
         pygame.display.flip()
         clock.tick(FPS)
 
